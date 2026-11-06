@@ -1,0 +1,24 @@
+title: SSH Brute Force (5+ failed passwords from one IP in 120s)
+id: 6f1c2a10-0001-4b1a-9c1e-socsim100100
+status: experimental
+description: |
+  Соответствует правилу socsim 100100. Срабатывает на 5+ Failed password
+  с одного IP за 120 секунд. Внимание: Sigma сама по себе не хранит состояние —
+  окно/порог задаются в целевом SIEM при конвертации.
+references:
+  - https://attack.mitre.org/techniques/T1110/
+author: soc-launchpad-v2
+logsource:
+  product: linux
+  service: sshd
+detection:
+  selection:
+    message|contains: "Failed password"
+  condition: selection
+falsepositives:
+  - Пользователь с опечаткой в пароле
+  - Сервисная учётка с просроченным паролем (ловушка expired_password_service_account)
+level: medium
+tags:
+  - attack.credential_access
+  - attack.t1110

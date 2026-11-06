@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "name": "default",
+  "description": "7 дней, фон + ловушки + 6 кампаний",
+  "duration_days": 7,
+  "seed": 2026,
+  "hosts": ["web01", "db01"],
+  "background": { "ssh": true, "web": true, "cron": true },
+  "traps": [
+    "expired_password_service_account",
+    "forgotten_password",
+    "nessus_scan",
+    "admin_useradd_crontab",
+    "dev_tmp_binary"
+  ],
+  "campaigns": [
+    { "type": "ssh_bruteforce_compromise", "start_day": 1, "start_hour": 14,
+      "attacker_ip": "192.0.2.10", "target_host": "web01", "target_user": "root" },
+    { "type": "web_exploitation", "start_day": 2, "start_hour": 10,
+      "attacker_ip": "198.51.100.7", "target_host": "web01" },
+    { "type": "port_scan_recon", "start_day": 3, "start_hour": 3,
+      "attacker_ip": "203.0.113.9", "target_host": "db01" },
+    { "type": "slow_port_scan", "start_day": 4, "start_hour": 9,
+      "attacker_ip": "192.0.2.20", "target_host": "db01" },
+    { "type": "valid_account_after_hours", "start_day": 5, "start_hour": 2,
+      "attacker_ip": "198.51.100.30", "target_host": "web01", "target_user": "alice" },
+    { "type": "port_scan_recon", "start_day": 6, "start_hour": 22,
+      "attacker_ip": "203.0.113.50", "target_host": "web01" }
+  ]
+}

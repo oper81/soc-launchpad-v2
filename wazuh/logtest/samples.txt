@@ -1,0 +1,5 @@
+Jan 05 14:00:44 web01 sshd[8143]: Failed password for root from 192.0.2.10 port 45172 ssh2
+Jan 05 14:03:36 web01 sshd[45151]: Accepted password for root from 192.0.2.10 port 54124 ssh2
+198.51.100.7 - - [05/Jan/2026:10:00:00 +0000] "GET /.env HTTP/1.1" 404 0 "-" "sqlmap/1.7"
+Jan 05 01:45:14 db01 kernel: [IPTABLES DROP] IN=eth0 OUT= MAC=00:00:00:00:00:00 SRC=203.0.113.9 DST=db01 LEN=60 PROTO=TCP DPT=36
+type=SYSCALL msg=audit(1767600000.123:456): arch=c000003e syscall=59 success=yes exit=0 a0=0 a1=0 a2=0 a3=0 items=2 ppid=1 pid=4242 auid=1000 uid=1000 gid=1000 euid=1000 comm="payload" exe="/tmp/payload" key="exec_tmp"

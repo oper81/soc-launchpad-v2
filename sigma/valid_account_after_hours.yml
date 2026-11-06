@@ -1,0 +1,24 @@
+title: Valid Account Login After Hours (00:00-06:00)
+id: 6f1c2a10-0004-4b1a-9c1e-socsim100140
+status: experimental
+description: |
+  Соответствует правилу socsim 100140. Accepted password в 00:00-06:00.
+  Частичное покрытие: не отличает легитимную ночную работу от компромисса.
+references:
+  - https://attack.mitre.org/techniques/T1078/
+author: soc-launchpad-v2
+logsource:
+  product: linux
+  service: sshd
+detection:
+  selection:
+    message|contains: "Accepted password"
+  timeframe: 00:00-06:00
+  condition: selection
+falsepositives:
+  - Легитимная ночная работа администратора
+  - Плановые задачи (cron не логинится по SSH, так что маловероятно)
+level: low
+tags:
+  - attack.defense_evasion
+  - attack.t1078

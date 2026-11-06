@@ -1,0 +1,37 @@
+<!--
+  ФРАГМЕНТ ossec.conf — не самостоятельный XML-документ.
+  Вставить содержимое внутрь существующего <ossec_config> ... </ossec_config>.
+  Проверено: НЕТ. Пути — подставь свои.
+
+  Проверка синтаксиса (из корня проекта):
+    python -c "import xml.etree.ElementTree as ET; ET.fromstring('<root>'+open('wazuh/ossec/ossec.conf.fragment.xml',encoding='utf-8').read()+'</root>'); print('XML OK')"
+-->
+<localfile>
+  <log_format>syslog</log_format>
+  <location>/var/log/auth.log</location>
+</localfile>
+
+<localfile>
+  <log_format>syslog</log_format>
+  <location>/var/log/syslog</location>
+</localfile>
+
+<localfile>
+  <log_format>syslog</log_format>
+  <location>/var/log/kern.log</location>
+</localfile>
+
+<localfile>
+  <log_format>apache</log_format>
+  <location>/var/log/nginx/access.log</location>
+</localfile>
+
+<localfile>
+  <log_format>audit</log_format>
+  <location>/var/log/audit/audit.log</location>
+</localfile>
+
+<!-- FIM на /tmp (для auditd exec_tmp) -->
+<syscheck>
+  <directories check_all="yes" report_changes="yes" realtime="yes">/tmp</directories>
+</syscheck>

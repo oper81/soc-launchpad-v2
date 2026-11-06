@@ -1,0 +1,4 @@
+# Положить в /etc/audit/rules.d/99-socsim.rules на агенте, затем:
+#   sudo augenrules --load
+# Проверено: НЕТ.
+-w /tmp -p x -k exec_tmp

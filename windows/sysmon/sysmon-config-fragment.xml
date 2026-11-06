@@ -1,0 +1,26 @@
+<!--
+  ФРАГМЕНТ Sysmon-конфига. Не самостоятельный XML — вставить в <Sysmon> ... </Sysmon>.
+  Проверено: НЕТ (нет Windows-ВМ). Схема — по документации Sysmon v15+.
+-->
+<Sysmon>
+  <EventFiltering>
+    <!-- Процессы -->
+    <ProcessCreate onmatch="include">
+      <Image condition="contains">\tmp\</Image>
+      <Image condition="contains">\Temp\</Image>
+      <Image condition="end with">powershell.exe</Image>
+      <Image condition="end with">cmd.exe</Image>
+    </ProcessCreate>
+    <!-- Сеть -->
+    <NetworkConnect onmatch="include">
+      <DestinationPort condition="is">22</DestinationPort>
+      <DestinationPort condition="is">3389</DestinationPort>
+      <DestinationPort condition="is">445</DestinationPort>
+    </NetworkConnect>
+    <!-- Файлы в /tmp-аналогах -->
+    <FileCreate onmatch="include">
+      <TargetFilename condition="contains">\Temp\</TargetFilename>
+      <TargetFilename condition="contains">\tmp\</TargetFilename>
+    </FileCreate>
+  </EventFiltering>
+</Sysmon>

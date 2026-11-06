@@ -1,0 +1,23 @@
+title: Port Scan (15+ DROP events from one IP in 60s)
+id: 6f1c2a10-0003-4b1a-9c1e-socsim100120
+status: experimental
+description: |
+  Соответствует правилу socsim 100120. 15+ iptables DROP с одного IP за 60с.
+  Как и для брутфорса, окно/порог задаются в целевом SIEM при конвертации.
+references:
+  - https://attack.mitre.org/techniques/T1046/
+author: soc-launchpad-v2
+logsource:
+  product: linux
+  service: kernel
+detection:
+  selection:
+    message|contains: "IPTABLES DROP"
+  condition: selection
+falsepositives:
+  - Легитимное сканирование уязвимостей (Nessus)
+  - Медленный скан (slow_port_scan) намеренно не покрывается
+level: medium
+tags:
+  - attack.discovery
+  - attack.t1046

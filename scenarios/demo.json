@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "name": "demo",
+  "description": "Мини-сценарий для проверки конвейера",
+  "duration_days": 1,
+  "seed": 42,
+  "hosts": ["web01", "db01"],
+  "background": { "ssh": true, "web": true, "cron": true },
+  "traps": ["expired_password_service_account", "nessus_scan"],
+  "campaigns": [
+    {
+      "type": "ssh_bruteforce_compromise",
+      "start_day": 0,
+      "start_hour": 14,
+      "attacker_ip": "192.0.2.10",
+      "target_host": "web01",
+      "target_user": "root"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "socsim"
+version = "0.1.0"
+description = "soc-launchpad-v2: synthetic SOC lab telemetry and L1 triage trainer"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = []
+
+[project.scripts]
+socsim = "socsim.cli:main"
+
+[tool.setuptools]
+packages = ["socsim"]

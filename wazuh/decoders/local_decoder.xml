@@ -1,0 +1,6 @@
+<!-- Локальные декодеры. Проверено: НЕТ (нужна ВМ с Wazuh + wazuh-logtest). -->
+<decoder name="auditd-exec-tmp">
+  <program_name>^audit</program_name>
+  <regex offset="after_parent">type=SYSCALL .* exe="(/tmp/[^"]+)".* key="exec_tmp"</regex>
+  <order>exe</order>
+</decoder>

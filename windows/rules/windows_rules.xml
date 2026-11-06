@@ -1,0 +1,48 @@
+<!--
+  Правила Wazuh для Windows (100200-100240). Надстройка над встроенными
+  windows_eventchannel-правилами. Проверено: НЕТ (нет Windows-ВМ).
+  Точные if_sid могут отличаться в твоей версии Wazuh — проверять wazuh-logtest.
+-->
+<group name="windows,socsim,">
+
+  <!-- 100200: неуспешный вход (4625) -->
+  <rule id="100200" level="8">
+    <if_sid>60122</if_sid>
+    <field name="win.system.eventID">^4625$</field>
+    <description>socsim-win: failed logon (4625)</description>
+    <mitre><id>T1110</id></mitre>
+  </rule>
+
+  <!-- 100210: успешный вход (4624) -->
+  <rule id="100210" level="3">
+    <if_sid>60106</if_sid>
+    <field name="win.system.eventID">^4624$</field>
+    <description>socsim-win: successful logon (4624)</description>
+  </rule>
+
+  <!-- 100220: создание процесса (4688) с подозрительным путём -->
+  <rule id="100220" level="10">
+    <if_sid>60110</if_sid>
+    <field name="win.system.eventID">^4688$</field>
+    <field name="win.eventdata.newProcessName" type="pcre2">(?i)\\\\(tmp|temp)\\\\</field>
+    <description>socsim-win: process created from Temp (4688)</description>
+    <mitre><id>T1059</id></mitre>
+  </rule>
+
+  <!-- 100230: создание пользователя (4720) -->
+  <rule id="100230" level="10">
+    <if_sid>60125</if_sid>
+    <field name="win.system.eventID">^4720$</field>
+    <description>socsim-win: local user created (4720)</description>
+    <mitre><id>T1136</id></mitre>
+  </rule>
+
+  <!-- 100240: очистка журнала (1102) -->
+  <rule id="100240" level="12">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">^1102$</field>
+    <description>socsim-win: audit log cleared (1102)</description>
+    <mitre><id>T1070</id></mitre>
+  </rule>
+
+</group>
